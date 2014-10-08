@@ -1,0 +1,15 @@
+
+public class TestInserts {
+
+	public static void main(String[] args) {
+		System.out.println("Why!!!!");
+		testStuff();
+	}
+
+	private static void testStuff() {
+		int testytest = 0;
+		testytest += 1;
+		System.out.println(testytest);
+	}
+
+}

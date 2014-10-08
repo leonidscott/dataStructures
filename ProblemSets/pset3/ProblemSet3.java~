@@ -1,0 +1,56 @@
+//lenny scott problem set 3
+
+public class ProblemSet3 {
+	public static void main(String args[]) {
+		String[] exampleArray = {"badger", "badger", "badger", "badger", "badger", "badger",
+					"mushroom!", "mushroom!"};
+		mostFrequentElement(exampleArray);
+		mostFrequentElementTest();
+	}
+	
+	public static String mostFrequentElement(String[] stringArray) {
+		return "";
+	}
+	
+	public static void mostFrequentElementTest() {
+		/*Test:
+			1.{null}				should return a lenny made error "no elements to search through"
+			2.{"badger"}				should return badger
+			3.{"badger", "badger"}			should return badger
+			4.{"badger", mushroom"}			should return badger
+			5.{null, null, null}			should return a lenny made error "no elements to search through"
+			6.{"badger", null, null}		should return badger
+			7.{"badger", "badger", null}		should return badger
+			8.{"badger", "mushroom!", null} 	should return badger
+			9.{"badger", "badger", "mushroom!"}	should return badger
+		*/
+		//test 1
+		String[] testArrayOneElement = new String[1];
+		System.out.println("input1 = {}: " + mostFrequentElement(testArrayOneElement).equals("I'm sorry Joe, i'm afraid I can't do that: no elements to search through"));
+		//test 2
+		testArrayOneElement[0] = "badger";
+		System.out.println("input2 = {badger}: " + mostFrequentElement(testArrayOneElement).equals("badger"));
+		//test 3
+		String[] testArrayTwoElement = {"badger", "badger"};
+		System.out.println("input3 = {badger, badger}: " + mostFrequentElement(testArrayTwoElement).equals("badger"));
+		//test 4
+		testArrayTwoElement[1] = "mushroom!";
+		System.out.println("input4 = {badger, mushroom!}: " + mostFrequentElement(testArrayTwoElement).equals("badger"));
+		//test 5
+		String[] testArrayThreeElement = new String[3];
+		System.out.println("input5 = {}: " + mostFrequentElement(testArrayThreeElement).equals("I'm sorry Joe, i'm afriad I can't do that: no elements to search through"));
+		//test 6
+		testArrayThreeElement[0] = "badger";
+		System.out.println("input6 = {badger}: " + mostFrequentElement(testArrayThreeElement).equals("badger"));
+		//test 7
+		testArrayThreeElement[1] = "badger";
+		System.out.println("input7 = {badger, badger}: " + mostFrequentElement(testArrayThreeElement).equals("badger"));
+		//test 8
+		testArrayThreeElement[1] = "mushroom!";
+		System.out.println("input8 = {badger, mushroom!}: " + mostFrequentElement(testArrayThreeElement).equals("badger"));
+		//test 9 
+		testArrayThreeElement[1] = "badger";
+		testArrayThreeElement[2] = "mushroom!";
+		System.out.println("input9 = {badger, badger, mushroom!}: " + mostFrequentElement(testArrayThreeElement).equals("badger"));
+	}
+}

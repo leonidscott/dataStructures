@@ -1,0 +1,10 @@
+public class GotThreeInts {
+	public static void main(String[] args) {
+		//getting ints from command line
+		int n1 = Integer.parseInt(args[0]);
+		int n2 = Integer.parseInt(args[1]);
+		int n3 = Integer.parseInt(args[2]);
+		
+		
+	}
+}
