@@ -13,7 +13,9 @@ public class TestIntStack {
 		testPeek();
 		testPeekOnEmptyStack();
 		testSize();
-		//testInvert();
+		testInvert();
+		testConvertToArrayList();
+		testCopy();
 	}
 
 	private static void testPushAndPop() {
@@ -125,12 +127,59 @@ public class TestIntStack {
 	}
 	
 	private static void testInvert() {
-		System.out.println("Testing size() (should print all true):");
+		System.out.println("Testing invert() (should print all true):");
 		// if invert() is called on an empty stack, should return an empty stack
 		IntStackInterface testStack = new IntStack();
-		System.out.println("[]".equals(testStack.invert()));
+		System.out.println("[]".equals(testStack.invert().toString()));
 		// if invert() is called on a stack with size one, should return a stack with same element
+		testStack = new IntStack();
+		testStack.push(1);
+		System.out.println("[1]".equals(testStack.invert().toString()));
 		// if invert() is called on a stack with multiple elements, should return a stack with the elements in reverse order
+		testStack = new IntStack();
+		testStack.push(8);
+		testStack.push(9000);
+		testStack.push(9001);
+		testStack.push(-5);
+		System.out.println("[-5, 9001, 9000, 8]".equals(testStack.invert().toString()));
+	}
+	
+	private static void testConvertToArrayList() {
+		System.out.println("Testing convertToArrayList() (should print all true):");
+		// if convertToArrayList() is called on an empty stack, should return an empty ArrayList<Integer>
+		IntStackInterface testStack = new IntStack();
+		System.out.println("[]".equals(testStack.convertToArrayList().toString()));
+		// if convertToArrayList() is called on a non-empty stack, should return an ArrayList<Integer> with those elements in it, with bottom elements on the left.
+		testStack = new IntStack();
+		testStack.push(5);
+		testStack.push(87);
+		testStack.push(34);
+		testStack.push(1234);
+		System.out.println("[5, 87, 34, 1234]".equals(testStack.convertToArrayList().toString()));
+	}
+	
+	private static void testCopy() {
+		System.out.println("Testing copy() (should print all true):");
+		// if copy() is called on an empty stack, should return an empty stack.
+		IntStackInterface testStack = new IntStack();
+//		System.out.println(testStack.copy().toString());
+		System.out.println(testStack.toString().equals(testStack.copy().toString()));
+//		System.out.println(testStack.equals(testStack.copy()));
+		
+		// if copy() is called on a non-empty stack, should return an identical stack.
+		testStack = new IntStack();
+		testStack.push(89);
+		testStack.push(46);
+		testStack.push(99);
+		IntStackInterface comparisonStack = new IntStack();
+		comparisonStack.push(89);
+		comparisonStack.push(46);
+		comparisonStack.push(99);
+//		comparisonStack.push(12);
+//		comparisonStack.pop();
+//		System.out.println(testStack.copy().toString());
+		System.out.println(testStack.toString().equals(testStack.copy().toString()));
+//		System.out.println(testStack.equals(testStack.copy()));
 	}
 }
 

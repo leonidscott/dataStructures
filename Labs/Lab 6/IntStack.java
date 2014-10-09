@@ -1,6 +1,7 @@
 // Aaron Lemmon && Lenny Scott
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EmptyStackException;
 
 public class IntStack implements IntStackInterface {
@@ -50,23 +51,30 @@ public class IntStack implements IntStackInterface {
 
 	@Override
 	public IntStackInterface invert() {
-		IntStackInterface inverse = new IntStack();
+		IntStack inverse = new IntStack();
+		inverse.nextIndex = this.nextIndex;
+		inverse.intArray = new int[intArray.length];
 		for(int i = 0; i < nextIndex; i++) {
-			
+			inverse.intArray[i] = this.intArray[nextIndex - 1 - i];
 		}
-		return null;
+		return inverse;
 	}
 
 	@Override
 	public ArrayList<Integer> convertToArrayList() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> newArrayList = new ArrayList<Integer>();
+		for(int i = 0; i < nextIndex; i++) {
+			newArrayList.add(intArray[i]);
+		}
+		return newArrayList;
 	}
 
 	@Override
 	public IntStackInterface copy() {
-		// TODO Auto-generated method stub
-		return null;
+		IntStack copy = new IntStack();
+		copy.nextIndex = this.nextIndex;
+		copy.intArray = this.intArray.clone();
+		return copy;
 	}
 	
 	@Override
@@ -92,4 +100,14 @@ public class IntStack implements IntStackInterface {
 			intArray = doubledArray;
 		}
 	}
+//	
+//	@Override
+//	public boolean equals(Object obj) {
+//		IntStack comparison = (IntStack) obj;
+//		int[] relevantRangeCurrent = Arrays.copyOfRange(this.intArray, 0, this.nextIndex);
+//		int[] relevantRangeComparison = Arrays.copyOfRange(comparison.intArray, 0, comparison.nextIndex);
+//		return relevantRangeCurrent.equals(relevantRangeComparison) && super.equals(obj);
+//	}
+//	
+
 }
