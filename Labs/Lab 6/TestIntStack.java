@@ -175,8 +175,8 @@ public class TestIntStack {
 		comparisonStack.push(89);
 		comparisonStack.push(46);
 		comparisonStack.push(99);
-//		comparisonStack.push(12);
-//		comparisonStack.pop();
+		comparisonStack.push(12);
+		comparisonStack.pop();
 //		System.out.println(testStack.copy().toString());
 		System.out.println(testStack.toString().equals(testStack.copy().toString()));
 //		System.out.println(testStack.equals(testStack.copy()));
