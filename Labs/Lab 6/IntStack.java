@@ -1,7 +1,6 @@
 // Aaron Lemmon && Lenny Scott
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EmptyStackException;
 
 public class IntStack implements IntStackInterface {
