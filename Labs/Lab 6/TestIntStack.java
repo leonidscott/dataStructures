@@ -24,7 +24,9 @@ public class TestIntStack {
 		
 		// Testing push and pop
 		testStack.push(5);
+		System.out.println("[5]".equals(testStack.toString()));
 		System.out.println(testStack.pop() == 5);
+		System.out.println("[]".equals(testStack.toString()));
 		
 		// Testing that popping returns the most recently pushed item.
 		testStack = new IntStack();
@@ -32,9 +34,7 @@ public class TestIntStack {
 		testStack.push(2);
 		System.out.println(testStack.pop() == 2);
 		System.out.println(testStack.pop() == 1);
-		
-		// Will test exceptions here:
-		
+		System.out.println("[]".equals(testStack.toString()));
 	}
 	
 	private static void testPopOnEmptyStack() {
@@ -91,6 +91,10 @@ public class TestIntStack {
 		System.out.println(!testStack.empty());
 	}
 	
+	/* When eclipse auto-generated this method (since we called it first in main before it was defined), it appeared
+	 * right below main. We wanted to move it below all the other methods we made, so we highlighted it and used alt+arrowDown
+	 * to move the method all the way here.
+	 */
 	private static void testPeek() {
 		System.out.println("Testing peek() (should print all true):");
 		// testing that peek() returns the top element without removing it.
@@ -162,9 +166,7 @@ public class TestIntStack {
 		System.out.println("Testing copy() (should print all true):");
 		// if copy() is called on an empty stack, should return an empty stack.
 		IntStackInterface testStack = new IntStack();
-//		System.out.println(testStack.copy().toString());
 		System.out.println(testStack.toString().equals(testStack.copy().toString()));
-//		System.out.println(testStack.equals(testStack.copy()));
 		
 		// if copy() is called on a non-empty stack, should return an identical stack.
 		testStack = new IntStack();
@@ -177,9 +179,7 @@ public class TestIntStack {
 		comparisonStack.push(99);
 		comparisonStack.push(12);
 		comparisonStack.pop();
-//		System.out.println(testStack.copy().toString());
 		System.out.println(testStack.toString().equals(testStack.copy().toString()));
-//		System.out.println(testStack.equals(testStack.copy()));
 	}
 }
 
