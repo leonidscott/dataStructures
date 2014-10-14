@@ -100,6 +100,7 @@ public class IntStack implements IntStackInterface {
 			intArray = doubledArray;
 		}
 	}
+
 //	
 //	@Override
 //	public boolean equals(Object obj) {
