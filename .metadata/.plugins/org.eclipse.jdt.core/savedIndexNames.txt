@@ -1,3 +1,0 @@
-INDEX VERSION 1.127+/home/scot0530/dataStructures/.metadata/.plugins/org.eclipse.jdt.core
-1221369115.index
-513355463.index
