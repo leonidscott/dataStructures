@@ -75,11 +75,19 @@ public class OurLinkedList<E> implements OurList<E>, Iterable<E> {
 	
 	@Override
 	public String toString() {
+		Node current = head;
 		String resultString = "[";
 		for (int i = 0; i < this.size(); i++) {
-			
+			current = current.next;
+			if (current.next != null) {
+				resultString += current.value + ", ";
+			}
+			else {
+				resultString += current.value;
+			}
 		}
-		return "";
+		resultString += "]";
+		return resultString;
 	}
 
 	/* An internal class that we use to represent the nodes in the list */

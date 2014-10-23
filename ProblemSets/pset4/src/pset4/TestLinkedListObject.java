@@ -14,7 +14,7 @@ public class TestLinkedListObject {
 		System.out.print("Test 1: ");
 		System.out.println("[]".equals(test.toString()));
 		
-		// testing with one integer prints to []
+		// testing with one integer prints to [integer]
 		System.out.print("Test 2: " );
 		test.add(0, 1);
 		System.out.println("[1]".equals(test.toString()));
