@@ -78,8 +78,12 @@ public class OurLinkedList<E> implements OurList<E>, Iterable<E> {
 		Node current = head;
 		String resultString = "[";
 		for (int i = 0; i < this.size(); i++) {
+			System.out.println("inside for loop");
 			current = current.next;
-			if (current.next != null) {
+			System.out.println("current: " + current);
+			if (current == null) {
+				System.out.println("inside if");
+				// current is null, can't get val?
 				resultString += current.value + ", ";
 			}
 			else {
