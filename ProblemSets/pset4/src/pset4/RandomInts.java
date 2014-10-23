@@ -43,7 +43,9 @@ public class RandomInts implements Iterable<Integer>{
 			return newInt;
 		}
 		
-		// eclipse didn't give me a remove method
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 }
