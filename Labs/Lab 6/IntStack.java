@@ -140,7 +140,7 @@ public class IntStack implements IntStackInterface {
 			intArray = doubledArray;
 		}
 	}
-	
+
 /* We wrote this under the notion that it would use lower level operations and thus be 
  * lickity split but alas... @joeBeaverWeBrokeIt*/
 //	
