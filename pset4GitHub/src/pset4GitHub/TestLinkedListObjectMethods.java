@@ -1,3 +1,5 @@
+package pset4GitHub;
+
 
 public class TestLinkedListObjectMethods {
 
@@ -151,3 +153,4 @@ public class TestLinkedListObjectMethods {
 		System.out.println(!compareOne.equals(compareString));
 	}
 }
+
