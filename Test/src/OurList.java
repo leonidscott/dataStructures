@@ -1,4 +1,3 @@
-package pset4;
 
 public interface OurList<E>  {
     /**

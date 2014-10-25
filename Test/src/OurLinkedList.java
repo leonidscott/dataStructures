@@ -1,5 +1,7 @@
-package pset4;
+
 import java.util.Iterator;
+
+import org.omg.CORBA.Current;
 
 public class OurLinkedList<E> implements OurList<E>, Iterable<E> {
 	int count = 0;
@@ -78,20 +80,52 @@ public class OurLinkedList<E> implements OurList<E>, Iterable<E> {
 		Node current = head;
 		String resultString = "[";
 		for (int i = 0; i < this.size(); i++) {
-			System.out.println("inside for loop");
-			current = current.next;
-			System.out.println("current: " + current);
-			if (current == null) {
-				System.out.println("inside if");
-				// current is null, can't get val?
+
+			if (current.next != null) {
 				resultString += current.value + ", ";
 			}
 			else {
 				resultString += current.value;
 			}
+			current = current.next;
 		}
 		resultString += "]";
 		return resultString;
+	}
+	
+	public boolean equals(Object compareInput) {
+		OurLinkedList<E> compareTo = (OurLinkedList<E>) compareInput;
+		Node compareToCurrent = compareTo.head;
+		Node compareFromCurrent = head;
+		
+		if (!(compareInput instanceof OurLinkedList)) {
+			return false;
+		}
+		
+		if(this.size() != compareTo.size()) {
+			return false;
+		}
+		
+		for (int i = 0; i < this.size(); i++) {
+			if (compareFromCurrent.value == null && compareToCurrent.value != null) {
+				return false;
+			}
+			else if (compareToCurrent.value == null && compareFromCurrent.value != null) {
+				return false;
+			}
+			else if (compareFromCurrent.value == null && compareFromCurrent.value == null) {
+				compareFromCurrent = compareFromCurrent.next;
+				compareToCurrent = compareToCurrent.next;
+			}
+			else {
+				if (!compareFromCurrent.value.equals(compareToCurrent.value)) {
+					return false;
+				}
+				compareFromCurrent = compareFromCurrent.next;
+				compareToCurrent = compareToCurrent.next;
+			}
+		}
+		return true;
 	}
 
 	/* An internal class that we use to represent the nodes in the list */
@@ -129,7 +163,6 @@ public class OurLinkedList<E> implements OurList<E>, Iterable<E> {
 			return toReturn;
 		}
 
-		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}

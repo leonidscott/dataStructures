@@ -1,4 +1,3 @@
-package pset4;
 
 public class ListIndexOutOfBoundsException extends Exception {
 
