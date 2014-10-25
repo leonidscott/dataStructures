@@ -1,4 +1,4 @@
-package pset4GitHub;
+package pset4Git;
 
 public class ListIndexOutOfBoundsException extends Exception {
 
@@ -10,3 +10,4 @@ public class ListIndexOutOfBoundsException extends Exception {
 		super(message);
 	}
 }
+

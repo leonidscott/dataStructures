@@ -1,5 +1,4 @@
-package pset4GitHub;
-
+package pset4Git;
 
 public class TestLinkedListObjectMethods {
 
@@ -153,4 +152,3 @@ public class TestLinkedListObjectMethods {
 		System.out.println(!compareOne.equals(compareString));
 	}
 }
-

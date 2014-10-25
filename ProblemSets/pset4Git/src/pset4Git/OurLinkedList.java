@@ -1,5 +1,4 @@
-package pset4GitHub;
-
+package pset4Git;
 
 import java.util.Iterator;
 

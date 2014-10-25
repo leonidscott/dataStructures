@@ -1,5 +1,4 @@
-package pset4GitHub;
-
+package pset4Git;
 
 public interface OurList<E>  {
     /**
@@ -46,3 +45,4 @@ public interface OurList<E>  {
     public void clear();
 	
 }
+
