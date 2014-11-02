@@ -1,3 +1,4 @@
+// Lenny Scott, Take Home 2: Tests
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -19,14 +20,10 @@ public class TestSortingList {
 	/*
 	 * ADD/GET: EDGE CASE
 	 */
-	@Test
-	public void getFromNonExistantIndex() {
+	@Test (expected = ListIndexOutOfBoundsException.class)
+	public void getFromNonExistantIndex() throws ListIndexOutOfBoundsException {
 		// Tests getting from a place that doesn't exist
-		try {
-			empty.get(5);
-			fail("should have thrown a ListIndexOutOfBoundsException");
-		} catch (ListIndexOutOfBoundsException e) {
-		}
+		empty.get(5);
 	}
 	
 	/*
@@ -141,34 +138,21 @@ public class TestSortingList {
 	/*
 	 * REMOVE: EDGE CASES
 	 */
-	@Test
-	public void removeFromEmpty() {
+	@Test (expected = ListIndexOutOfBoundsException.class)
+	public void removeFromEmpty() throws ListIndexOutOfBoundsException {
 		// Test removing from an an empty list
-		
-		try {
-			empty.remove(0);
-			fail("Should have thrown a ListIndexOutOfBoundsException");
-		} catch (ListIndexOutOfBoundsException e) {
-		}
+		empty.remove(0);
 	}
 	
-	@Test
-	public void removeFromBadIndex() {
+	@Test (expected = ListIndexOutOfBoundsException.class)
+	public void removeFromBadIndex() throws ListIndexOutOfBoundsException {
 		SortingList<Integer> copy = filled;
 		
 		// Test removing from an unsupported index
-		try {
 			copy.remove(13);
-			fail("Should have thrown a ListIndexOutOfBoundsException");
-		} catch (ListIndexOutOfBoundsException e) {
-		}
 		
 		// Test removing from a non-existant index
-		try {
 			copy.remove(-1);
-			fail("Should have thrown a ListIndexOutOfBoundsException");
-		} catch (ListIndexOutOfBoundsException e) {
-		}
 	}
 	
 	/*

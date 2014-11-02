@@ -1,3 +1,4 @@
+// Lenny Scott, Take Home 2: Interface
 public interface SortingList<E extends Comparable<E>> extends Iterable<E> {
     /*
      * Return true if this list contains no elements, and false otherwise
