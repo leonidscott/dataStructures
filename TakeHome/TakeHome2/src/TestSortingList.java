@@ -86,7 +86,7 @@ public class TestSortingList {
 
 		// Tests that two adjacent subNodes don't interfere with each other
 		filled.add(6);
-		filled.add(7);
+		filled.add(6);
 		assertEquals(new Integer(6), filled.get(7));
 		assertEquals(new Integer(7), filled.get(8));
 		assertEquals(new Integer(7), filled.get(9));
