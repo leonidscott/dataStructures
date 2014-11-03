@@ -27,7 +27,7 @@ public class TestSortingList {
 	}
 	
 	/*
-	 * ADD/GET: KEY NODESListIndexOutOfBoundsException
+	 * ADD/GET: KEY NODES
 	 */
 	@Test
 	public void addAndGetKeyNodesIsPossible() throws ListIndexOutOfBoundsException {
@@ -39,12 +39,16 @@ public class TestSortingList {
 	
 	@Test
 	public void addAndGetKeyNodesAreSorted() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		
 		// Tests elements are put in increasing order
 		filled.add(3);
 		assertEquals(new Integer(3), filled.get(0));
+		assertEquals(new Integer(5), filled.get(1));
 
-		filled.get(7);
-		assertEquals(new Integer(7), filled.get(4));
+		filled.add(7);
+		assertEquals(new Integer(7), filled.get(2));
 	}
 	
 	/*
@@ -52,6 +56,11 @@ public class TestSortingList {
 	 */
 	@Test
 	public void addAndGetSubNode() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		
 		// Tests adding to create a subNode
 		filled.add(5);
 		assertEquals(new Integer(5), filled.get(2));
@@ -64,6 +73,13 @@ public class TestSortingList {
 	
 	@Test
 	public void addAndGetKeyNodesWithSubNodes() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+
 		// Tests adding keyNodes does not screw up subNodes
 		filled.add(6);
 		filled.add(4);
@@ -75,6 +91,15 @@ public class TestSortingList {
 	
 	@Test
 	public void addAndGetAdjacentSubNodes() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+				
 		// Increasing Complexity
 		filled.add(3);
 		assertEquals(new Integer(3), filled.get(1));
@@ -92,6 +117,18 @@ public class TestSortingList {
 	//========= isEmpty() =========
 	@Test
 	public void isEmpty() {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		
 		assertTrue(empty.isEmpty());
 		assertTrue(!filled.isEmpty());
 	}
@@ -99,6 +136,18 @@ public class TestSortingList {
 	// ========= size() =========
 	@Test
 	public void size() {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+				
 		SortingList<Integer> addable = new MySortingList<Integer>();
 		
 		assertTrue(empty.size() == 0);
@@ -113,6 +162,18 @@ public class TestSortingList {
 	// ========= uniqueValueCount() =========
 	@Test
 	public void uniqueValueCount() {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		
 		SortingList<Integer> subListed = new MySortingList<Integer>();
 		subListed.add(5);
 		subListed.add(5);
@@ -125,6 +186,18 @@ public class TestSortingList {
 	// ========= clear() =========
 	@Test
 	public void clear() {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		
 		SortingList<Integer> copy = filled;
 		
 		empty.clear();
@@ -146,6 +219,18 @@ public class TestSortingList {
 	
 	@Test (expected = ListIndexOutOfBoundsException.class)
 	public void removeFromBadIndex() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		
 		SortingList<Integer> copy = filled;
 		
 		// Test removing from an unsupported index
@@ -160,6 +245,7 @@ public class TestSortingList {
 	 */
 	@Test
 	public void removeKeyNodes() throws ListIndexOutOfBoundsException {
+		
 		SortingList<Integer> keyNodes = new MySortingList<Integer>(); // for testing remove
 		keyNodes.add(-10);
 		keyNodes.add(-5);
@@ -189,6 +275,19 @@ public class TestSortingList {
 	 */
 	@Test
 	public void removeKeyNodeNearSubNode() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test makes sure that removing a keyNode near subNodes does not shift anything badly
 		removeFromFilled.remove(2);
 		assertEquals(9, removeFromFilled.size());
@@ -197,6 +296,19 @@ public class TestSortingList {
 	
 	@Test
 	public void removeSubNodeMiddle() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test removes from a middle point of a list of SubNodes
 		removeFromFilled.remove(3);
 		assertEquals(8, removeFromFilled.size());
@@ -206,6 +318,19 @@ public class TestSortingList {
 	
 	@Test
 	public void removeSubNodeLast() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test removes from the last point of a list of SubNodes
 		removeFromFilled.remove(3);
 		assertEquals(7, removeFromFilled.size());
@@ -215,6 +340,19 @@ public class TestSortingList {
 	
 	@Test
 	public void removeKeyNodeOfSubNode() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test removes from the keyNode while there are subNodes attached to it
 		removeFromFilled.remove(3);
 		assertEquals(6, removeFromFilled.size());
@@ -225,6 +363,19 @@ public class TestSortingList {
 	
 	@Test
 	public void removeHeadWithSubNode() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test removing the head while it has subNodes and letting the new keyNode appropriately take its place
 		removeFromFilled.remove(0);
 		assertEquals(5, removeFromFilled.size());
@@ -234,6 +385,19 @@ public class TestSortingList {
 	
 	@Test
 	public void removeLastKeyNodeWithSubNode() throws ListIndexOutOfBoundsException {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		removeFromFilled = filled;
+		
 		// Test removing the last keyNode while it has subNodes and letting the new keyNode appropriately take its place
 		removeFromFilled.remove(3);
 		assertEquals(4, removeFromFilled.size());
