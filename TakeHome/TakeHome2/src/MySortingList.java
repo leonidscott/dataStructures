@@ -57,8 +57,9 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 
 			// if item is less than head.val make item the head that points to old head
 			if (current.value.compareTo(item) > 0) {
-				Node toAdd = new Node(head, null, item, true);
-				current = toAdd;
+				//Node toAdd = new Node(head, null, item, true);
+				//current = toAdd;
+				head = new Node(head, null, item, true);
 				
 				//head = new Node(head, null, item, true);
 				//current = toAdd;
