@@ -31,6 +31,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 
 	@Override
 	public void add(E item) {
+		
 		// If the linked List is empty, the node we add becomes the head
 		if(isEmpty()) {
 			head = new Node(null, null, item, true);
@@ -39,29 +40,38 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			return;
 		}
 		
-		Node current = head;
+		//Node current = head; if it is not empty, then head already points to something
 		int currentCount = 0;
 		int totalJump = 0;
+		Node current = head;
 		
+		//System.out.println(current.value);
+		//System.out.println(current.nextKeyNode);
+		//System.out.println(head.value);
+
 		while (currentCount < compositeCount) {
 			// indicates how many spaces will be jumped
 			totalJump = current.subCount;
-			
+
 			// ==== DEALS WITH KEY NODES ====
-			
+
 			// if item is less than head.val make item the head that points to old head
 			if (current.value.compareTo(item) > 0) {
-				Node preHeadKeyPointer = new Node(head.nextKeyNode, head.nextSubNode, head.value, true);
-				head = new Node(preHeadKeyPointer, null, item, true);
-				System.out.println(head.value);
-				System.out.println(head.nextKeyNode);
-				System.out.println(preHeadKeyPointer.value);
-				System.out.println(preHeadKeyPointer.nextKeyNode);
+				Node toAdd = new Node(head, null, item, true);
+				current = toAdd;
+				
+				//head = new Node(head, null, item, true);
+				//current = toAdd;
+				//Node toAdd = new Node(current, null, item, true);
+				//head = toAdd;
+				System.out.println("head.val " + current.value);
+				System.out.println("head.next.val " + current.nextKeyNode);
 				compositeCount++;
 				System.out.println(item + " is replacing head: composite count = " + compositeCount);
 				return;
+				
 			}
-			// if item is greater that current but less than current.next, stick item in between
+			// if item is greater than current but less than current.next, stick item in between
 			if (current.nextKeyNode != null && current.nextKeyNode.value.compareTo(item) > 0) {
 				Node toAdd = new Node(current.nextKeyNode, null, item, true);
 				current.nextKeyNode = toAdd;
@@ -69,18 +79,24 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 				System.out.println(item + " is squeezing between to pre-existing nodes: composit count = " + compositeCount);
 				return;
 			}
-			// if item is greater than the last thing in the list than stick it at the end
-			if (current.value.compareTo(item) < 0 && current.nextKeyNode == null) {
+			// if item is greater than the last thing in the list than stick it
+			// at the end
+			if (current.value.compareTo(item) < 0
+					&& current.nextKeyNode == null) {
 				Node toAdd = new Node(null, null, item, true);
 				current.nextKeyNode = toAdd;
 				compositeCount++;
-				System.out.println(item + " is bigger than anything else in the linked List: composit count = " + compositeCount);
+				System.out
+						.println(item
+								+ " is bigger than anything else in the linked List: composit count = "
+								+ compositeCount);
 				return;
 			}
-			
+
 			// === DEALS WITH SUB NODES ===
-			
-			// if item is the same as current, iterate through all current's subNodes, once at the end, add item
+
+			// if item is the same as current, iterate through all current's
+			// subNodes, once at the end, add item
 			if (current.value.compareTo(item) == 0) {
 				for (int i = current.subCount; i > 1; i--) {
 					current = current.nextSubNode;
@@ -89,14 +105,16 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 				Node toAdd = new Node(null, null, item, false);
 				current.nextSubNode = toAdd;
 				compositeCount++;
-				System.out.println("composite count " + compositeCount + "Item = " + item);
+				System.out.println("composite count " + compositeCount
+						+ "Item = " + item);
 				return;
 			}
-			
+
 			// move to the next key node
 			current = current.nextKeyNode;
 			currentCount += totalJump;
 			System.out.println("moving to next key Node");
+
 		}
 	}
 
@@ -111,6 +129,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		int startingIndex = 0;
 		Node startingNode = head;
 		
+		System.out.println("breaking in get");
 		if (index < 0) {
 			throw new ListIndexOutOfBoundsException("the index " + index + " is less than zero");
 		}
@@ -137,9 +156,13 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		compositeCount = 0;
 	}
 	
-	private E findNode(int index, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException{
+	private E findNode(int index, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException {
+		System.out.println("current's value " + currentNode.value);
+		System.out.println("current's subCount " + currentNode.subCount);
+		System.out.println("current.nextKeyNode " + currentNode.nextKeyNode);
 		if (index < currentNode.subCount + currentIndex) {
 			for (int i = currentNode.subCount; i > 0; i--) {
+				System.out.println("made it past if");
 				if (currentIndex == index) {
 					return currentNode.value;
 				}
@@ -148,12 +171,13 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			}
 		}
 		
-		currentIndex += currentNode.subCount;
-		currentNode = currentNode.nextKeyNode;
-		
 		if (currentIndex >= compositeCount -1) {
 			throw new ListIndexOutOfBoundsException("the index " + index + " is outside the range of the list");
 		}
+		System.out.println("next iteration of findNode()");
+
+		currentIndex += currentNode.subCount;
+		currentNode = currentNode.nextKeyNode;
 		
 		return findNode(index, currentIndex, currentNode);
 	}

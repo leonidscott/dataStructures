@@ -35,6 +35,10 @@ public class TestSortingList {
 		filled.add(5);
 		assertEquals(new Integer(5), filled.get(0));
 		
+		// Non progressive test
+		filled.add(7);
+		assertEquals(new Integer(7), filled.get(1));
+		
 	}
 	
 	@Test
@@ -45,6 +49,7 @@ public class TestSortingList {
 		// Tests elements are put in increasing order
 		filled.add(3);
 		assertEquals(new Integer(3), filled.get(0));
+		System.out.println("get at 0 " + filled.get(0));
 		assertEquals(new Integer(5), filled.get(1));
 
 		filled.add(7);
