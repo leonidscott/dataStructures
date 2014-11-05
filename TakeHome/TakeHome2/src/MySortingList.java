@@ -2,6 +2,8 @@
 
 import java.util.Iterator;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	// fields
 	private int compositeCount = 0;
@@ -40,6 +42,18 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			return;
 		}
 		
+		/* SUBSEQUENT IF COPIED FROM INSIDE WHILE LOOP IN ORDER TO ISOLATE IT FROM CURRENT */
+		// if item is less than head.val make item the head that points to old head
+		if (head.value.compareTo(item) > 0) {
+			head = new Node(head, null, item, true);
+			
+			compositeCount++;
+			System.out.println("head.val " + head.value);
+			System.out.println(item + " is replacing head: composite count = " + compositeCount);
+			System.out.println(item + " points to = " + head.nextKeyNode);
+			return;
+		}
+		
 		//Node current = head; if it is not empty, then head already points to something
 		int currentCount = 0;
 		int totalJump = 0;
@@ -56,19 +70,15 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			// ==== DEALS WITH KEY NODES ====
 
 			// if item is less than head.val make item the head that points to old head
-			if (current.value.compareTo(item) > 0) {
-				//Node toAdd = new Node(head, null, item, true);
-				//current = toAdd;
+			if (head.value.compareTo(item) > 0) {
 				head = new Node(head, null, item, true);
-				
-				//head = new Node(head, null, item, true);
-				//current = toAdd;
-				//Node toAdd = new Node(current, null, item, true);
-				//head = toAdd;
-				System.out.println("head.val " + current.value);
-				System.out.println("head.next.val " + current.nextKeyNode);
-				compositeCount++;
+				//current = head;
+
+				System.out.println("head.val " + head.value);
+				System.out.println("head.next.val " + head.nextKeyNode);
 				System.out.println(item + " is replacing head: composite count = " + compositeCount);
+				System.out.println(item + " points to = " + head.nextKeyNode);
+				compositeCount++;
 				return;
 				
 			}
@@ -128,9 +138,10 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	@Override
 	public E get(int index) throws ListIndexOutOfBoundsException {
 		int startingIndex = 0;
-		Node startingNode = head;
+		Node currentNode = head;
+		//System.out.println("head points to " + currentNode.value);
+		//System.out.println("head.next points to " + currentNode.nextKeyNode);
 		
-		System.out.println("breaking in get");
 		if (index < 0) {
 			throw new ListIndexOutOfBoundsException("the index " + index + " is less than zero");
 		}
@@ -142,7 +153,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			throw new ListIndexOutOfBoundsException("the linked list is empty");
 		}
 		
-		return findNode(index, startingIndex, startingNode);
+		return findNode(index, startingIndex, currentNode);
 	}
 
 	@Override
@@ -158,12 +169,11 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	}
 	
 	private E findNode(int index, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException {
-		System.out.println("current's value " + currentNode.value);
-		System.out.println("current's subCount " + currentNode.subCount);
-		System.out.println("current.nextKeyNode " + currentNode.nextKeyNode);
-		if (index < currentNode.subCount + currentIndex) {
-			for (int i = currentNode.subCount; i > 0; i--) {
-				System.out.println("made it past if");
+		System.out.println("in findNode: index = " + index + ", currentIndex = " + currentIndex);
+		System.out.println("currentNode.nextKeyNode " + currentNode.nextKeyNode);
+		if (index <= currentNode.subCount - 1 + currentIndex) {
+			System.out.println("index is less than the current index + the current node's subcount");
+			for (int i = 0; i < currentNode.subCount; i++) {
 				if (currentIndex == index) {
 					return currentNode.value;
 				}
@@ -175,7 +185,6 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		if (currentIndex >= compositeCount -1) {
 			throw new ListIndexOutOfBoundsException("the index " + index + " is outside the range of the list");
 		}
-		System.out.println("next iteration of findNode()");
 
 		currentIndex += currentNode.subCount;
 		currentNode = currentNode.nextKeyNode;

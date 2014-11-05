@@ -48,8 +48,10 @@ public class TestSortingList {
 		
 		// Tests elements are put in increasing order
 		filled.add(3);
+		System.out.println("*** First Test ****");
 		assertEquals(new Integer(3), filled.get(0));
 		System.out.println("get at 0 " + filled.get(0));
+		System.out.println("*** Second Test ****");
 		assertEquals(new Integer(5), filled.get(1));
 
 		filled.add(7);
