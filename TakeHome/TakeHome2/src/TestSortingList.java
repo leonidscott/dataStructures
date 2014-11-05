@@ -39,6 +39,9 @@ public class TestSortingList {
 		filled.add(7);
 		assertEquals(new Integer(7), filled.get(1));
 		
+		filled.add(14);
+		assertEquals(new Integer(14), filled.get(2));
+		
 	}
 	@Test
 	public void addedKeyNodesAreSorted() throws ListIndexOutOfBoundsException {
@@ -88,6 +91,13 @@ public class TestSortingList {
 		filled.add(5);
 		assertEquals(new Integer(3), filled.get(3));
 		assertEquals(new Integer(7), filled.get(4)); // checks if adding subNodes shifts keyNodes
+	}
+	
+	@Test
+	public void addAndGetSubNodesPossible() throws ListIndexOutOfBoundsException {
+		filled.add(5);
+		filled.add(5);
+		assertEquals(new Integer(5), filled.get(1));
 	}
 	
 	@Test

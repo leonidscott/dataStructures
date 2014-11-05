@@ -107,8 +107,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 				Node toAdd = new Node(null, null, item, false);
 				current.nextSubNode = toAdd;
 				compositeCount++;
-				System.out.println("composite count " + compositeCount
-						+ "Item = " + item);
+				System.out.println("composite count " + compositeCount + ", Item = " + item);
 				return;
 			}
 
