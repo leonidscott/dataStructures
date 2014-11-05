@@ -128,7 +128,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 
 	@Override
 	public E get(int index) throws ListIndexOutOfBoundsException {
-		int startingIndex = 0;
+		int currentIndex = 0;
 		Node currentNode = head;
 		//System.out.println("head points to " + currentNode.value);
 		//System.out.println("head.next points to " + currentNode.nextKeyNode);
@@ -144,7 +144,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			throw new ListIndexOutOfBoundsException("the linked list is empty");
 		}
 		
-		return findNode(index, startingIndex, currentNode);
+		return findNode(index, currentIndex, currentNode);
 	}
 
 	@Override
@@ -159,10 +159,11 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		compositeCount = 0;
 	}
 	
-	private E findNode(int index, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException {
-		if (index < currentNode.subCount + currentIndex) {
+	private E findNode(int targetIndex, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException {
+		if ((currentIndex + currentNode.subCount - 1) >= targetIndex) {
 			for (int i = 0; i < currentNode.subCount; i++) {
-				if (currentIndex == index) {
+				System.out.println("gets past for loop");
+				if (currentIndex == targetIndex) {
 					return currentNode.value;
 				}
 				currentIndex++;
@@ -171,13 +172,13 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		}
 		
 		if (currentIndex >= compositeCount -1) {
-			throw new ListIndexOutOfBoundsException("the index " + index + " is outside the range of the list");
+			throw new ListIndexOutOfBoundsException("the index " + targetIndex + " is outside the range of the list");
 		}
 
 		currentIndex += currentNode.subCount;
 		currentNode = currentNode.nextKeyNode;
 		
-		return findNode(index, currentIndex, currentNode);
+		return findNode(targetIndex, currentIndex, currentNode);
 	}
 
 	private class Node {
