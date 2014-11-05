@@ -40,6 +40,18 @@ public class TestSortingList {
 		assertEquals(new Integer(7), filled.get(1));
 		
 	}
+	@Test
+	public void addedKeyNodesAreSorted() throws ListIndexOutOfBoundsException {
+		filled.add(5);
+		System.out.println("===== added 5 =====");
+		assertEquals(new Integer(5), filled.get(0));
+		filled.add(7);
+		System.out.println("===== added 7=====");
+		assertEquals(new Integer(7), filled.get(1));
+		filled.add(6);
+		System.out.println("===== added 6=====");
+		assertEquals(new Integer(6), filled.get(2));
+	}
 	
 	@Test
 	public void addAndGetKeyNodesAreSorted() throws ListIndexOutOfBoundsException {

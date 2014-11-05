@@ -55,13 +55,9 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		}
 		
 		//Node current = head; if it is not empty, then head already points to something
-		int currentCount = 0;
-		int totalJump = 0;
+		int currentCount = 0; //the current index we are at
+		int totalJump = 0; //since we don't look into sub trees if we don't have so we add number of elements in a subTree 
 		Node current = head;
-		
-		//System.out.println(current.value);
-		//System.out.println(current.nextKeyNode);
-		//System.out.println(head.value);
 
 		while (currentCount < compositeCount) {
 			// indicates how many spaces will be jumped
@@ -87,20 +83,15 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 				Node toAdd = new Node(current.nextKeyNode, null, item, true);
 				current.nextKeyNode = toAdd;
 				compositeCount++;
-				System.out.println(item + " is squeezing between to pre-existing nodes: composit count = " + compositeCount);
+				System.out.println(item + " is squeezing between two pre-existing nodes: composit count = " + compositeCount);
 				return;
 			}
-			// if item is greater than the last thing in the list than stick it
-			// at the end
-			if (current.value.compareTo(item) < 0
-					&& current.nextKeyNode == null) {
+			// if item is greater than the last thing in the list than stick it at the end
+			if (current.value.compareTo(item) < 0 && current.nextKeyNode == null) {
 				Node toAdd = new Node(null, null, item, true);
 				current.nextKeyNode = toAdd;
 				compositeCount++;
-				System.out
-						.println(item
-								+ " is bigger than anything else in the linked List: composit count = "
-								+ compositeCount);
+				System.out.println(item + " is bigger than anything else in the linked List: composit count = " + compositeCount);
 				return;
 			}
 
@@ -169,10 +160,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	}
 	
 	private E findNode(int index, int currentIndex, Node currentNode) throws ListIndexOutOfBoundsException {
-		System.out.println("in findNode: index = " + index + ", currentIndex = " + currentIndex);
-		System.out.println("currentNode.nextKeyNode " + currentNode.nextKeyNode);
-		if (index <= currentNode.subCount - 1 + currentIndex) {
-			System.out.println("index is less than the current index + the current node's subcount");
+		if (index < currentNode.subCount + currentIndex) {
 			for (int i = 0; i < currentNode.subCount; i++) {
 				if (currentIndex == index) {
 					return currentNode.value;
