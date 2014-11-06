@@ -1,7 +1,11 @@
 // Lenny Scott, Take Home 2: Tests
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 
 public class TestSortingList {
@@ -446,5 +450,32 @@ public class TestSortingList {
 		assertEquals(4, removeFromFilled.size());
 		assertEquals(new Integer(7), removeFromFilled.get(3));
 		assertEquals(new Integer(6), removeFromFilled.get(2));
+	}
+	
+	@Test
+	public void iteratorWorks () {
+		// Progressive set up
+		filled.add(5);
+		filled.add(3);
+		filled.add(7);
+		filled.add(5);
+		filled.add(5);
+		filled.add(6);
+		filled.add(4);
+		filled.add(3);
+		filled.add(6);
+		filled.add(6);
+		
+		// Test iterator provides values in the sorted order dictated by the rules of the data structure
+		Integer[] someIntegers = new Integer[10];
+		Integer[] correctOutPutArrayList = {3, 3, 4, 5, 5, 5, 6, 6, 6, 7};
+		
+		int index = 0;
+		
+		for (Integer i : filled) {
+			someIntegers[index] = i;
+		}
+		
+		assertArrayEquals(correctOutPutArrayList, someIntegers);
 	}
 }

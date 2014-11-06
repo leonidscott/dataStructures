@@ -1,8 +1,13 @@
 // Lenny Scott, Take Home 2: Object
+/*
+ * My add method seems to not fully connect nodes and in result cause null pointers in other sections of the code
+ */
 
 import java.util.Iterator;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import com.sun.xml.internal.ws.api.pipe.NextAction;
 
 public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	// fields
@@ -11,8 +16,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+			return new LinkedListIterator();
 	}
 
 	@Override
@@ -27,8 +31,22 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 
 	@Override
 	public int uniqueValueCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		Node currentNode = head;
+		int keyNodeCount = 0;
+		
+		if (compositeCount == 0) {
+			return 0;
+		}
+		
+		if (currentNode.nextKeyNode == null) {
+			return 1;
+		}
+		
+		while (currentNode.nextKeyNode != null) {
+			currentNode = currentNode.nextKeyNode;
+			keyNodeCount++;
+		}
+		return keyNodeCount;
 	}
 
 	@Override
@@ -121,8 +139,20 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 
 	@Override
 	public int frequencyOf(E item) {
-		// TODO Auto-generated method stub
-		return 0;
+		Node current = head;
+		int frequency = 0;
+		
+		while (current.nextKeyNode != null) {
+			if (current.value == item) {
+				int subCountFromHead = current.subCount - 1;
+				for (int i = 0; i < (subCountFromHead); i++) {
+					frequency ++;
+					current = current.nextSubNode;
+				}
+			}
+			current = current.nextKeyNode;
+		}
+		return frequency;
 	}
 
 	@Override
@@ -147,9 +177,25 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 	}
 
 	@Override
-	public void remove(int index) throws ListIndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+	public void remove(int targetIndex) throws ListIndexOutOfBoundsException {
+		int currentIndex = 0;
+		Node currentNode = head;
 		
+		if (isEmpty() || targetIndex < 0 || targetIndex >= compositeCount) {
+			throw new ListIndexOutOfBoundsException("the index " + targetIndex + " is greater than the size of the linked list");
+		}
+		
+		while (currentIndex <= targetIndex) {
+			boolean removedInSubBranch = removeInSubBranch(currentIndex, targetIndex, currentNode);
+			boolean removedInKeyBranch = removeInKeyBranch(currentIndex, targetIndex, currentNode);
+			
+			if (removedInKeyBranch || removedInSubBranch) {
+				return;
+			}
+			
+			currentIndex += currentIndex + currentNode.subCount;
+			currentNode = currentNode.nextKeyNode;
+		}
 	}
 
 	@Override
@@ -180,6 +226,40 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		return findNode(targetIndex, currentIndex, currentNode);
 	}
 
+	private boolean removeInSubBranch(int currentIndex, int targetIndex, Node currentNode) {
+		if (currentIndex + (currentNode.subCount -1) >= targetIndex) { 
+			for (int i = 0; i < (currentNode.subCount - 1); i++) {
+				currentNode.subCount --;
+				
+				if (currentIndex++ == targetIndex) {
+					currentNode.nextSubNode = currentNode.nextSubNode.nextSubNode;
+					compositeCount --;
+					return true;
+				}
+				
+				currentIndex++;
+				currentNode = currentNode.nextSubNode;
+			}
+		}
+		return false;
+	}
+	
+	private boolean removeInKeyBranch(int currentIndex, int targetIndex, Node currentNode) {
+		if (currentIndex + currentNode.subCount == targetIndex) {
+			if (currentNode.nextKeyNode.nextSubNode == null) {
+				currentNode.nextKeyNode = currentNode.nextKeyNode.nextKeyNode;
+				compositeCount --;
+				return true;
+			}
+			
+			Node newKeyNode = currentNode.nextKeyNode.nextSubNode;
+			newKeyNode.nextKeyNode = currentNode.nextKeyNode.nextKeyNode;
+			currentNode.nextKeyNode = newKeyNode;
+			return true;
+		}
+		return false;
+	}
+
 	private class Node {
 		Node nextKeyNode;
 		Node nextSubNode;
@@ -193,6 +273,41 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 			this.value = value;
 			this.isKeyNode = isKeyNode;
 		}
+	}
+	
+	private class LinkedListIterator implements Iterator<E> {
+		Node next = head;
+		Node keyBranch = head;
+		
+		@Override
+		public boolean hasNext() {
+			return next != null;
+		}
+
+		@Override
+		public E next() {
+			if(next.subCount > 1) {
+				E toReturn = next.value;
+				if (next.nextSubNode != null) {
+					next = keyBranch;
+					keyBranch = keyBranch.nextKeyNode;
+					return toReturn;
+				}
+				next = next.nextSubNode;
+				return toReturn;
+			}
+			
+			E toReturn = next.value;
+			next = next.nextKeyNode;
+			
+			return toReturn;
+		}
+		
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
 	}
 
 }
