@@ -34,7 +34,7 @@ public class TestSortingList {
 		// Tests adding and getting at element 0
 		filled.add(5);
 		assertEquals(new Integer(5), filled.get(0));
-		
+			
 		// Non progressive test
 		filled.add(7);
 		assertEquals(new Integer(7), filled.get(1));
@@ -315,12 +315,12 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
-		removeFromFilled = filled;
+
 		
 		// Test makes sure that removing a keyNode near subNodes does not shift anything badly
-		removeFromFilled.remove(2);
-		assertEquals(9, removeFromFilled.size());
-		assertEquals(new Integer(5), removeFromFilled.get(2));
+		filled.remove(2);
+		assertEquals(9, filled.size());
+		assertEquals(new Integer(5), filled.get(2));
 	}
 	
 	@Test
@@ -336,13 +336,13 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
-		removeFromFilled = filled;
+		filled.remove(2);
 		
 		// Test removes from a middle point of a list of SubNodes
-		removeFromFilled.remove(3);
-		assertEquals(8, removeFromFilled.size());
-		assertEquals(new Integer(5), removeFromFilled.get(2));
-		assertEquals(new Integer(5), removeFromFilled.get(3));
+		filled.remove(3);
+		assertEquals(8, filled.size());
+		assertEquals(new Integer(5), filled.get(2));
+		assertEquals(new Integer(5), filled.get(3));
 	}
 	
 	@Test
@@ -358,7 +358,8 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
-		removeFromFilled = filled;
+		filled.remove(2);
+		filled.remove(3);
 		
 		// Test removes from the last point of a list of SubNodes
 		removeFromFilled.remove(3);
@@ -380,6 +381,10 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
+		filled.remove(2);
+		filled.remove(3);
+		filled.remove(3);
+		
 		removeFromFilled = filled;
 		
 		// Test removes from the keyNode while there are subNodes attached to it
@@ -387,7 +392,7 @@ public class TestSortingList {
 		assertEquals(6, removeFromFilled.size());
 		assertEquals(new Integer(5), removeFromFilled.get(2));
 		assertEquals(new Integer(6), removeFromFilled.get(3));
-		assertEquals(new Integer(7), removeFromFilled.get(4));
+		assertEquals(new Integer(7), removeFromFilled.get(5));
 	}
 	
 	@Test
@@ -403,6 +408,10 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
+		filled.remove(2);
+		filled.remove(3);
+		filled.remove(3);
+		filled.remove(3);
 		removeFromFilled = filled;
 		
 		// Test removing the head while it has subNodes and letting the new keyNode appropriately take its place
@@ -425,6 +434,11 @@ public class TestSortingList {
 		filled.add(3);
 		filled.add(6);
 		filled.add(6);
+		filled.remove(2);
+		filled.remove(3);
+		filled.remove(3);
+		filled.remove(3);
+		filled.remove(0);
 		removeFromFilled = filled;
 		
 		// Test removing the last keyNode while it has subNodes and letting the new keyNode appropriately take its place
