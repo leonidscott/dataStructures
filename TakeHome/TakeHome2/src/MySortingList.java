@@ -264,7 +264,7 @@ public class MySortingList<E extends Comparable<E>> implements SortingList<E> {
 		Node nextKeyNode;
 		Node nextSubNode;
 		E value;
-		boolean isKeyNode;
+		boolean isKeyNode; //I am aware this is useless 
 		int subCount = 1;
 		
 		public Node(Node nextKeyNode, Node nextSuNode, E value, boolean isKeyNode) {
