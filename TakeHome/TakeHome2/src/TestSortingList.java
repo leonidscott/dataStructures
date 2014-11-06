@@ -452,6 +452,7 @@ public class TestSortingList {
 		assertEquals(new Integer(6), removeFromFilled.get(2));
 	}
 	
+	// ===== iterator() =====
 	@Test
 	public void iteratorWorks () {
 		// Progressive set up
@@ -478,4 +479,42 @@ public class TestSortingList {
 		
 		assertArrayEquals(correctOutPutArrayList, someIntegers);
 	}
+	
+	/*
+	 *  TESTING TOTAL FUNCTIONALITY
+	 */
+
+	@Test
+	public void addRemoveAdd () throws ListIndexOutOfBoundsException {
+		SortingList<Integer> toAdd = new MySortingList<Integer>();
+		Integer[] correctOutPut = {1, 2};
+		Integer[] testOutPut = new Integer[3];
+		
+		toAdd.add(2);
+		toAdd.remove(0);
+		toAdd.add(1);
+		toAdd.add(2);
+		toAdd.remove(1);
+		toAdd.add(2);
+		
+		testOutPut[0] = toAdd.get(0);
+		testOutPut[1] = toAdd.get(1);
+		
+		assertArrayEquals(correctOutPut, testOutPut);
+	 }
+	
+	@Test
+	public void differentTypes () throws ListIndexOutOfBoundsException {
+		SortingList<String> someStrings = new MySortingList<String>();
+		
+		someStrings.add("why");
+		someStrings.add("... doesn't");
+		someStrings.add("... my add");
+		someStrings.add("work?");
+		someStrings.add("why");
+		
+		assertEquals(4, someStrings.uniqueValueCount());
+		
+	}
+
 }
