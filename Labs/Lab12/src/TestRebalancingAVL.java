@@ -16,7 +16,6 @@ public class TestRebalancingAVL {
 	
 	@Before
 	public void setUp() throws Exception {
-		sevenNodesTree = new AVLTree<Integer, String>();
 		sevenNodesTree.add(4, "apple");
 		sevenNodesTree.add(2, "banana");
 		sevenNodesTree.add(7, "strawberry");
@@ -29,10 +28,15 @@ public class TestRebalancingAVL {
 	@Before
 	public void setUpLeftHeavy() throws Exception {
 		leftHeavy.add(10, "a");
+		System.out.println("added 10");
 		leftHeavy.add(5, "b");
+		System.out.println("added 5");
 		leftHeavy.add(15, "c");
+		System.out.println("added 15");
 		leftHeavy.add(2, "d");
+		System.out.println("added 2");
 		leftHeavy.add(7, "e");
+		System.out.println("added 7");
 	}
 	
 	@Before
@@ -120,42 +124,92 @@ public class TestRebalancingAVL {
 	
 	@Test
 	public void testBigLeftRightAddLeft() throws Exception {
-		
+		leftHeavy.add(6, "f");
+		System.out.println("added 6");
+		assertEquals(3, leftHeavy.getHeight(7)); // this is root
+		assertEquals(2, leftHeavy.getHeight(5));
+		assertEquals(2, leftHeavy.getHeight(10));
+		assertEquals(1, leftHeavy.getHeight(2));
+		assertEquals(1, leftHeavy.getHeight(6));
+		assertEquals(1, leftHeavy.getHeight(15));
 	}
 	
 	@Test
 	public void testBigLeftRightAddRight() throws Exception {
-		
+		leftHeavy.add(8, "f");
+		assertEquals(3, leftHeavy.getHeight(7)); // this is root
+		assertEquals(2, leftHeavy.getHeight(5));
+		assertEquals(2, leftHeavy.getHeight(10));
+		assertEquals(1, leftHeavy.getHeight(2));
+		assertEquals(1, leftHeavy.getHeight(8));
+		assertEquals(1, leftHeavy.getHeight(15));
 	}
 	
 	@Test
 	public void testBigLeftLeftAddLeft() throws Exception {
+		leftHeavy.add(1, "f");
+		assertEquals(3, leftHeavy.getHeight(5)); // this is root
+		assertEquals(2, leftHeavy.getHeight(2));
+		assertEquals(2, leftHeavy.getHeight(10));
+		assertEquals(1, leftHeavy.getHeight(1));
+		assertEquals(1, leftHeavy.getHeight(7));
+		assertEquals(1, leftHeavy.getHeight(15));
 		
 	}
 	
 	@Test
 	public void testBigLeftLeftAddRight() throws Exception {
-		
+		leftHeavy.add(3, "f");
+		assertEquals(3, leftHeavy.getHeight(5)); // this is root
+		assertEquals(2, leftHeavy.getHeight(2));
+		assertEquals(2, leftHeavy.getHeight(10));
+		assertEquals(1, leftHeavy.getHeight(3));
+		assertEquals(1, leftHeavy.getHeight(7));
+		assertEquals(1, leftHeavy.getHeight(15));
 	}
 	
 	@Test
 	public void testBigRightLeftAddLeft() throws Exception {
-		
+		rightHeavy.add(11, "f");
+		assertEquals(3, rightHeavy.getHeight(12)); // this is root
+		assertEquals(2, rightHeavy.getHeight(10));
+		assertEquals(2, rightHeavy.getHeight(15));
+		assertEquals(1, rightHeavy.getHeight(5));
+		assertEquals(1, rightHeavy.getHeight(11));
+		assertEquals(1, rightHeavy.getHeight(17));
 	}
 	
 	@Test
 	public void testBigRightLeftAddRight() throws Exception {
-		
+		rightHeavy.add(13, "f");
+		//assertEquals(3, rightHeavy.getHeight(12)); // this is root
+		assertEquals(2, rightHeavy.getHeight(10));
+		assertEquals(2, rightHeavy.getHeight(15));
+		assertEquals(1, rightHeavy.getHeight(5));
+		assertEquals(1, rightHeavy.getHeight(13));
+		assertEquals(1, rightHeavy.getHeight(17));
 	}
 	
 	@Test
 	public void testBigRightRightAddLeft() throws Exception {
-		
+		rightHeavy.add(16, "f");
+		assertEquals(3, rightHeavy.getHeight(15)); // this is root
+		assertEquals(2, rightHeavy.getHeight(10));
+		assertEquals(2, rightHeavy.getHeight(17));
+		assertEquals(1, rightHeavy.getHeight(5));
+		assertEquals(1, rightHeavy.getHeight(12));
+		assertEquals(1, rightHeavy.getHeight(16));
 	}
 	
 	@Test
 	public void testBigRightRightAddRight() throws Exception {
-		
+		rightHeavy.add(18, "f");
+		assertEquals(3, rightHeavy.getHeight(15)); // this is root
+		assertEquals(2, rightHeavy.getHeight(10));
+		assertEquals(2, rightHeavy.getHeight(17));
+		assertEquals(1, rightHeavy.getHeight(5));
+		assertEquals(1, rightHeavy.getHeight(12));
+		assertEquals(1, rightHeavy.getHeight(18));
 	}
 	
 }
