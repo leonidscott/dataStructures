@@ -7,11 +7,12 @@ import org.junit.Test;
 
 
 public class TestOrders {
+	private BinarySearchTree<Integer, String> emptyTree = new BinarySearchTree<>();
 	private BinarySearchTree<Integer, String> specialCaseTree = new BinarySearchTree<Integer, String>();
 	private BinarySearchTree<Integer, String> filledTree = new BinarySearchTree<Integer, String>();
 	
 	private ArrayList<Pair<Integer, String>> empty = new ArrayList<Pair<Integer, String>>();
-	private ArrayList<Pair<Integer, String>> onePair = new ArrayList<Pair<Integer, String>>();
+	private ArrayList<Pair<Integer, String>> specialCaseResults = new ArrayList<Pair<Integer, String>>();
 	private ArrayList<Pair<Integer, String>> preOrderResults = new ArrayList<Pair<Integer, String>>();
 	private ArrayList<Pair<Integer, String>> postOrderResults = new ArrayList<Pair<Integer, String>>();
 	private ArrayList<Pair<Integer, String>> inOrderResults = new ArrayList<Pair<Integer, String>>();
@@ -71,7 +72,7 @@ public class TestOrders {
 		inOrderResults.add(new Pair<Integer, String>(4, "c1"));
 		inOrderResults.add(new Pair<Integer, String>(8, "b1"));
 		inOrderResults.add(new Pair<Integer, String>(10, "d1"));
-		inOrderResults.add(new Pair<Integer, String>(12, "b2"));
+		inOrderResults.add(new Pair<Integer, String>(12, "c2"));
 		inOrderResults.add(new Pair<Integer, String>(16, "a1"));
 		inOrderResults.add(new Pair<Integer, String>(20, "c3"));
 		inOrderResults.add(new Pair<Integer, String>(22, "d2"));
@@ -87,47 +88,47 @@ public class TestOrders {
 	
 	@Test
 	public void preOrderEmpty() {
-		assertEquals(specialCaseTree.preOrder(), empty);
+		assertEquals(emptyTree.preOrder(), empty);
 	}
 	
 	@Test
 	public void preOrderOneNode() {
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		assertEquals(specialCaseTree.preOrder(), onePair);
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		assertEquals(specialCaseTree.preOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void preOrderLeftChildren() {
 		specialCaseTree.add(8, "b1");
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		onePair.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
 		
-		assertEquals(specialCaseTree.preOrder(), onePair);
+		assertEquals(specialCaseTree.preOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void preOrderRightChildren() {
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		onePair.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
 		
-		assertEquals(specialCaseTree.preOrder(), onePair);
+		assertEquals(specialCaseTree.preOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void preOrderBothChildren() {
 		specialCaseTree.add(8, "b1");
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		onePair.add(new Pair<Integer, String>(8, "b1"));
-		onePair.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
 		
-		assertEquals(specialCaseTree.preOrder(), onePair);
+		assertEquals(specialCaseTree.preOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void preOrderOnFilledTree() {
-		assertEquals(specialCaseTree.preOrder(), preOrderResults);
+		assertEquals(filledTree.preOrder(), preOrderResults);
 	}
 	
 	/*
@@ -136,42 +137,42 @@ public class TestOrders {
 	
 	@Test
 	public void postOrderEmpty() {
-		assertEquals(specialCaseTree.postOrder(), empty);
+		assertEquals(emptyTree.postOrder(), empty);
 	}
 	
 	@Test
 	public void postOrderOneNode() {
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		assertEquals(specialCaseTree.postOrder(), onePair);
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		assertEquals(specialCaseTree.postOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void postOrderLeftChildren() {
 		specialCaseTree.add(8, "b1");
-		onePair.add(new Pair<Integer, String>(8, "b1"));
-		onePair.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
 		
-		assertEquals(specialCaseTree.postOrder(), onePair);
+		assertEquals(specialCaseTree.postOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void postOrderRightChildren() {
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(24, "b2"));
-		onePair.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
 		
-		assertEquals(specialCaseTree.postOrder(), onePair);
+		assertEquals(specialCaseTree.postOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void postOrderBothChildren() {
 		specialCaseTree.add(8, "b1");
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(8, "b1"));
-		onePair.add(new Pair<Integer, String>(24, "b2"));
-		onePair.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
 		
-		assertEquals(specialCaseTree.postOrder(), onePair);
+		assertEquals(specialCaseTree.postOrder(), specialCaseResults);
 	}
 	
 	@Test
@@ -186,46 +187,47 @@ public class TestOrders {
 	
 	@Test
 	public void inOrderEmpty() {
-		assertEquals(specialCaseTree.inOrder(), empty);
+		assertEquals(emptyTree.inOrder(), empty);
 	}
 	
 	@Test
 	public void inOrderOneNode() {
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		assertEquals(specialCaseTree.inOrder(), onePair);
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		assertEquals(specialCaseTree.inOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void inOrderLeftChildren() {
 		specialCaseTree.add(8, "b1");
-		onePair.add(new Pair<Integer, String>(8, "b1"));
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		
-		assertEquals(specialCaseTree.inOrder(), onePair);
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		assertEquals(specialCaseTree.inOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void inOrderRightChildren() {
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		onePair.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
 		
-		assertEquals(specialCaseTree.inOrder(), onePair);
+		assertEquals(specialCaseTree.inOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void inOrderBothChildren() {
 		specialCaseTree.add(8, "b1");
 		specialCaseTree.add(24, "b2");
-		onePair.add(new Pair<Integer, String>(8, "b1"));
-		onePair.add(new Pair<Integer, String>(16, "a1"));
-		onePair.add(new Pair<Integer, String>(24, "b2"));
+		specialCaseResults.add(new Pair<Integer, String>(8, "b1"));
+		specialCaseResults.add(new Pair<Integer, String>(16, "a1"));
+		specialCaseResults.add(new Pair<Integer, String>(24, "b2"));
 		
-		assertEquals(specialCaseTree.inOrder(), onePair);
+		assertEquals(specialCaseTree.inOrder(), specialCaseResults);
 	}
 	
 	@Test
 	public void inOrderOnFilledTree() {
+		System.out.println("Expected Data " + inOrderResults.toString());
+		System.out.println("Actual Data " + filledTree.inOrder().toString());
 		assertEquals(filledTree.inOrder(), inOrderResults);
 	}
 	

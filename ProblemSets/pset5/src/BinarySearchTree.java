@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.border.EmptyBorder;
+
 /*
  * Binary search tree stores values indexed by keys. Keys must be Comparable and
  * are organized based on their natural ordering (i.e. the ordering given by
@@ -91,27 +93,33 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		root = null;
 	}
 	
-	/*
-	 * Returns an ArrayList of key-value pairs in In-Order order
-	 */ 
-	public ArrayList<Pair<K,V>> inOrder() {
-		return null;
-	}
-	
-	/*
-	 * Returns an ArrayList of key-value pairs in Pre-Order order
-	 */ 
 	public ArrayList<Pair<K,V>> preOrder() {
-		return null;
-	}
-	
-	/*
-	 * Returns an ArrayList of key-value pairs in Post-Order order
-	 */ 
-	public ArrayList<Pair<K,V>> postOrder() {
-		return null;
+		ArrayList<Pair<K, V>> toReturn = new ArrayList<>();
+		if (root == null) {
+			return toReturn;
+		}
+		root.preOrder(root, toReturn);
+		return toReturn;
 	}
 
+	public ArrayList<Pair<K,V>> postOrder() {
+		ArrayList<Pair<K, V>> toReturn = new ArrayList<>();
+		if (root == null) {
+			return toReturn;
+		}
+		root.postOrder(root, toReturn);
+		return toReturn;
+	}
+	
+	public ArrayList<Pair<K,V>> inOrder() {
+		ArrayList<Pair<K, V>> toReturn = new ArrayList<>();
+		if (root == null) {
+			return toReturn;
+		}
+		root.inOrder(root, toReturn);
+		return toReturn;
+	}
+	
 	private class BSTNode {
 		public K key;
 		public V value;
@@ -175,6 +183,43 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 		public V remove(K removeKey) {
 			
 			return null;
+		}
+
+		public void preOrder(BSTNode current, ArrayList<Pair<K, V>> toReturn) {
+			toReturn.add(new Pair<K, V>(current.key, current.value));
+			
+			if (current.leftChild != null) {
+				preOrder(current.leftChild, toReturn);
+			}
+			
+			if (current.rightChild != null) {
+				preOrder(current.rightChild, toReturn);			
+			}
+			
+		}
+
+		public void postOrder(BSTNode current, ArrayList<Pair<K, V>> toReturn) {
+			if (current.leftChild != null) {
+				postOrder(current.leftChild, toReturn);
+			}
+			
+			if (current.rightChild != null) {
+				postOrder(current.rightChild, toReturn);			
+			}
+			
+			toReturn.add(new Pair<K, V>(current.key, current.value));
+		}
+
+		public void inOrder(BSTNode current, ArrayList<Pair<K, V>> toReturn) {
+			if (current.leftChild != null) {
+				inOrder(current.leftChild, toReturn);
+			}
+			
+			toReturn.add(new Pair<K, V>(current.key, current.value));
+			
+			if (current.rightChild != null) {
+				inOrder(current.rightChild, toReturn);			
+			}
 		}
 		
 
