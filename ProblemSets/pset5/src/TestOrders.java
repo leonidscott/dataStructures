@@ -226,8 +226,6 @@ public class TestOrders {
 	
 	@Test
 	public void inOrderOnFilledTree() {
-		System.out.println("Expected Data " + inOrderResults.toString());
-		System.out.println("Actual Data " + filledTree.inOrder().toString());
 		assertEquals(filledTree.inOrder(), inOrderResults);
 	}
 	
