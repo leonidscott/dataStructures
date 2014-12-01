@@ -28,15 +28,10 @@ public class TestRebalancingAVL {
 	@Before
 	public void setUpLeftHeavy() throws Exception {
 		leftHeavy.add(10, "a");
-		System.out.println("added 10");
 		leftHeavy.add(5, "b");
-		System.out.println("added 5");
 		leftHeavy.add(15, "c");
-		System.out.println("added 15");
 		leftHeavy.add(2, "d");
-		System.out.println("added 2");
 		leftHeavy.add(7, "e");
-		System.out.println("added 7");
 	}
 	
 	@Before
@@ -125,7 +120,6 @@ public class TestRebalancingAVL {
 	@Test
 	public void testBigLeftRightAddLeft() throws Exception {
 		leftHeavy.add(6, "f");
-		System.out.println("added 6");
 		assertEquals(3, leftHeavy.getHeight(7)); // this is root
 		assertEquals(2, leftHeavy.getHeight(5));
 		assertEquals(2, leftHeavy.getHeight(10));
