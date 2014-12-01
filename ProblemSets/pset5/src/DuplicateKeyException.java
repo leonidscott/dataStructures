@@ -1,3 +1,4 @@
+// Lenny Scott, pset 5
 public class DuplicateKeyException extends RuntimeException {
 	private String duplicateKeyString;
 

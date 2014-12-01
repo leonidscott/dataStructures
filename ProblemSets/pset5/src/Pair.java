@@ -1,3 +1,4 @@
+// Lenny Scott, pset 5
 public class Pair<K extends Comparable<K>, V> {
 	final public K key;
 	final public V value;

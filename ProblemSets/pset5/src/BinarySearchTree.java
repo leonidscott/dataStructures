@@ -1,6 +1,5 @@
+// Lenny Scott, pset 5
 import java.util.ArrayList;
-
-import javax.swing.border.EmptyBorder;
 
 /*
  * Binary search tree stores values indexed by keys. Keys must be Comparable and
