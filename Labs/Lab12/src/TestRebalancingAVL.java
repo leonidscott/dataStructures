@@ -1,3 +1,6 @@
+//Ryan McArthur, Lenny, Lemmon
+//Lab12
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;

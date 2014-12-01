@@ -1,3 +1,6 @@
+//Ryan McArthur, Lenny, Lemmon
+//Lab12
+
 public class AVLTree<K extends Comparable<K>, V> {
 	private AVLNode root = null;
 
@@ -15,7 +18,6 @@ public class AVLTree<K extends Comparable<K>, V> {
 	 */
 	public void add(K key, V value) {
 		if (isEmpty()) {
-//			root = new AVLNode(key, value, null);
 			root = new AVLNode(key, value);
 		} 
 		else {
@@ -57,7 +59,6 @@ public class AVLTree<K extends Comparable<K>, V> {
 		public V value;
 		public AVLNode leftChild = null;
 		public AVLNode rightChild = null;
-//		public AVLNode parent = null;
 		public int height = 1;
 
 		/*
