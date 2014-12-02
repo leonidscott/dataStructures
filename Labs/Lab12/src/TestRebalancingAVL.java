@@ -1,5 +1,5 @@
-//Ryan McArthur, Lenny, Lemmon
-//Lab12
+// Ryan McArthur, Lenny, Lemmon
+// Lab12
 
 import static org.junit.Assert.*;
 
@@ -8,12 +8,13 @@ import org.junit.Test;
 
 
 public class TestRebalancingAVL {
+	
 	/*
 	 * *** SET UP ***
 	 */
 	
 	private AVLTree<Integer, String> testTree = new AVLTree<Integer, String>();
-	private AVLTree<Integer,String> sevenNodesTree = new AVLTree<Integer, String>();
+	private AVLTree<Integer, String> sevenNodesTree = new AVLTree<Integer, String>();
 	private AVLTree<Integer, String> leftHeavy = new AVLTree<Integer, String>();
 	private AVLTree<Integer, String> rightHeavy = new AVLTree<Integer, String>();
 	

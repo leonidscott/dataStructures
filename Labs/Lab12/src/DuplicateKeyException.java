@@ -1,7 +1,8 @@
-//Ryan McArthur, Lenny, Lemmon
-//Lab12
+// Ryan McArthur, Lenny, Lemmon
+// Lab12
 
 public class DuplicateKeyException extends RuntimeException {
+	
 	private String duplicateKeyString;
 
 	public DuplicateKeyException(Object duplicateKey) {

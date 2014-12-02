@@ -1,24 +1,21 @@
-//Ryan McArthur, Lenny, Lemmon
-//Lab12
+// Ryan McArthur, Lenny, Lemmon
+// Lab12
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class AVL_Tree_Test {
 	// Lemmon, Lenny, Valencia
-
 
 	private AVLTree<Integer,String> emptyTree;
 	private AVLTree<Integer,String> eightNodesTree;
 
 	@Before
 	public void setUp() {
-		emptyTree = new AVLTree<Integer,String>();
-		eightNodesTree = new AVLTree<Integer,String>();
+		emptyTree = new AVLTree<Integer, String>();
+		eightNodesTree = new AVLTree<Integer, String>();
 		eightNodesTree.add(4, "apple");
 		eightNodesTree.add(6, "banana");
 		eightNodesTree.add(1, "strawberry");
@@ -86,6 +83,4 @@ public class AVL_Tree_Test {
 		assertTrue(eightNodesTree.isEmpty());
 		assertNull(eightNodesTree.get(4));
 	}	
-
-
 }

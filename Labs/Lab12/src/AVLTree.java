@@ -1,7 +1,8 @@
-//Ryan McArthur, Lenny, Lemmon
-//Lab12
+// Ryan McArthur, Lenny, Lemmon
+// Lab12
 
 public class AVLTree<K extends Comparable<K>, V> {
+	
 	private AVLNode root = null;
 
 	/*
@@ -19,8 +20,7 @@ public class AVLTree<K extends Comparable<K>, V> {
 	public void add(K key, V value) {
 		if (isEmpty()) {
 			root = new AVLNode(key, value);
-		} 
-		else {
+		} else {
 			root.add(key, value);
 		}
 	}
@@ -78,82 +78,68 @@ public class AVLTree<K extends Comparable<K>, V> {
 			this.leftChild = leftChild;
 			this.rightChild = rightChild;
 		}
-		
-		
-				private void changeFields(K key, V value, AVLNode leftChild, AVLNode rightChild) {
-					this.key = key;
-					this.value = value;
-					this.leftChild = leftChild;
-					this.rightChild = rightChild;
-				}
-				
+
+		private void changeFields(K key, V value, AVLNode leftChild, AVLNode rightChild) {
+			this.key = key;
+			this.value = value;
+			this.leftChild = leftChild;
+			this.rightChild = rightChild;
+		}
 
 		public void add(K addKey, V addValue) {
 
 			int keyComparison = addKey.compareTo(key);
 			if (keyComparison == 0) {
 				throw new DuplicateKeyException(addKey);
-			}
-			else if (keyComparison < 0) {
+			} else if (keyComparison < 0) {
 				if (leftChild == null) {
 					leftChild = new AVLNode(addKey, addValue);
-				}
-				else {
+				} else {
 					leftChild.add(addKey, addValue);
 				}
-			}
-			else {
+			} else {
 				if (rightChild == null) {
 					rightChild = new AVLNode(addKey, addValue);
-				}
-				else {
+				} else {
 					rightChild.add(addKey, addValue);
 				}
 			}
 			balance();
-			
 		}
 
 		public AVLNode get(K getKey) {
 			int keyComparison = getKey.compareTo(key);
 			if (keyComparison == 0){
 				return this;
-			}
-			else if (keyComparison < 0) {
+			} else if (keyComparison < 0) {
 				if (leftChild == null) {
 					return null;
-				}
-				else {
+				} else {
 					return leftChild.get(getKey);
 				}
-			}
-			else {
+			} else {
 				if (rightChild == null) {
 					return null;
-				}
-				else {
+				} else {
 					return rightChild.get(getKey);
 				}
 			}
 		}
 		
-		public void balance(){
-			
+		public void balance() {
 			int balanceFactor = balanceFactor();
 			if (balanceFactor == 2) {
 				if (leftChild.balanceFactor() == -1) { // left-right case
 					leftChild.rotateLeft();
 				}
 				rotateRight();
-			}
-			else if (balanceFactor == -2) {
+			} else if (balanceFactor == -2) {
 				if (rightChild.balanceFactor() == 1) { // right-left case
 					rightChild.rotateRight();
 				}
 				rotateLeft();
 			}
 			updateHeight();
-			
 		}
 
 		private void rotateRight() {
@@ -163,13 +149,12 @@ public class AVLTree<K extends Comparable<K>, V> {
 			updateHeight();
 		}
 
-
 		private void rotateLeft() {
-					AVLNode toMoveDown = new AVLNode(key, value, leftChild, rightChild.leftChild);
-					changeFields(rightChild.key, rightChild.value, toMoveDown, rightChild.rightChild);
-					leftChild.updateHeight();
-					updateHeight();
-				}
+			AVLNode toMoveDown = new AVLNode(key, value, leftChild, rightChild.leftChild);
+			changeFields(rightChild.key, rightChild.value, toMoveDown, rightChild.rightChild);
+			leftChild.updateHeight();
+			updateHeight();
+		}
 
 		private void updateHeight() {
 			height = Math.max(getLeftHeight(), getRightHeight()) + 1;
