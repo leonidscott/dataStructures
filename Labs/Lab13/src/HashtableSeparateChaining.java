@@ -1,4 +1,4 @@
-import java.awt.Paint;
+// Lenny and Thomas, Lab 13
 import java.util.LinkedList;
 
 public class HashtableSeparateChaining<K, V> implements OurHashtable<K, V> {
